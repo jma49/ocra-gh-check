@@ -7,7 +7,11 @@ export function delayMs(attempt: number): number {
 }
 
 /** How long to wait before retrying, honouring the server's Retry-After header. */
-export function retryAfterMs(header: string | null, attempt: number): number {
-  if (header === null) return delayMs(attempt);
-  return Number(header) * 1000;
+export function retryAfterMs(header: string | null, attempt: number, now = Date.now()): number {
+  if (header === null || header.trim() === "") return delayMs(attempt);
+  const seconds = Number(header);
+  if (Number.isFinite(seconds) && seconds >= 0) return seconds * 1000;
+  const at = Date.parse(header);
+  if (Number.isFinite(at)) return Math.max(0, at - now);
+  return delayMs(attempt);
 }
