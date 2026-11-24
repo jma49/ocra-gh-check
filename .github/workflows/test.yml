@@ -16,6 +16,3 @@ jobs:
         with:
           node-version: 24
       - run: node --test clamp.test.ts
-      - name: Report
-        if: always()
-        run: for n in $(seq 1 260); do echo "report line $n"; done
