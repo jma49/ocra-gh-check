@@ -6,7 +6,7 @@ export class TtlCache<V> {
   constructor(private readonly ttlSeconds: number) {}
 
   set(key: string, value: V, now = Date.now()): void {
-    this.entries.set(key, { value, expiresAt: now + this.ttlSeconds });
+    this.entries.set(key, { value, expiresAt: now + this.ttlSeconds * 1000 });
   }
 
   get(key: string, now = Date.now()): V | undefined {
