@@ -4,4 +4,4 @@ Scratch repository for an end-to-end check of ocra's GitHub setup that people wi
 
 ## Retries
 
-`shouldRetry(attempt)` allows up to `MAX_ATTEMPTS` (5) attempts, waiting `retryAfterMs(header, attempt)` between them.
+`shouldRetry(attempt)` allows up to `MAX_ATTEMPTS` (5) attempts and then gives up, waiting `retryAfterMs(header, attempt)` between them.
