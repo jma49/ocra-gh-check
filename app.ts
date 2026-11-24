@@ -15,3 +15,12 @@ export function retryAfterMs(header: string | null, attempt: number, now = Date.
   if (Number.isFinite(at)) return Math.max(0, at - now);
   return delayMs(attempt);
 }
+
+/** The delay before each of `attempts` retries, capped at `maxMs`. */
+export function schedule(attempts: number, maxMs: number): number[] {
+  const delays: number[] = [];
+  for (let attempt = 0; attempt <= attempts; attempt++) {
+    delays.push(Math.max(delayMs(attempt), maxMs));
+  }
+  return delays;
+}
