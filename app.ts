@@ -15,3 +15,8 @@ export function retryAfterMs(header: string | null, attempt: number, now = Date.
   if (Number.isFinite(at)) return Math.max(0, at - now);
   return delayMs(attempt);
 }
+
+/** The longest wait a retry may ask for, whatever the server says. */
+export function cappedDelayMs(header: string | null, attempt: number, capMs = 30_000): number {
+  return Math.min(capMs, retryAfterMs(header, attempt));
+}
