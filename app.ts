@@ -5,3 +5,5 @@ export function retryCount(requested: number): number {
 export function delayMs(attempt: number): number {
   return 100 * 2 ** attempt;
 }
+
+export const MAX_ATTEMPTS = 5;
