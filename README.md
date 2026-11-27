@@ -6,7 +6,7 @@ Scratch repository for testing [Ocra](https://ocracloud.com)'s GitHub App review
 
 1. The [workflow](.github/workflows/ocra.yml) listens for `pull_request_target`. Opening, updating, or reopening a PR starts a review for an owner, member, or collaborator. Adding the `ocra-review` label starts a review regardless of the author's association.
 2. The job uses the `ocra-review` environment, restricted to `main`. It exchanges the App's client ID (`OCRA_APP_CLIENT_ID`, a variable) and private key (`OCRA_APP_KEY`, a secret) for an installation token and checks out the default branch, not the PR head. The pull request is reviewed as data; its code is not executed.
-3. The pinned [Open-CR-Agent Action](https://github.com/ocrahq/Open-CR-Agent/commit/324c6abae8a145e71392511f3a731db3c6e29fbb) runs with that token. The [fixture configuration](.ocra/config.json) uses the direct runtime and one OpenRouter model for all tiers (`OPENROUTER_API_KEY`), with a one-dollar review budget set in the workflow. Ocra posts as `ocra-review-check[bot]` and trusts earlier review summaries only from that account.
+3. The [workflow](.github/workflows/ocra.yml) pins the Open-CR-Agent Action and runs it with that token. The [fixture configuration](.ocra/config.json) uses the direct runtime and one OpenRouter model for all tiers (`OPENROUTER_API_KEY`), with a one-dollar review budget set in the workflow. Ocra posts as `ocra-review-check[bot]` and trusts earlier review summaries only from that account.
 
 [CODEOWNERS](.github/CODEOWNERS) assigns owners to workflow and Ocra configuration changes. For a setup that contributors with push access cannot change on their own, the default branch must also require code-owner approval; the file alone does not enforce it.
 
